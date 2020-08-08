@@ -18,7 +18,7 @@ Clone the repository on to your system. Import the project into your IDE. Make s
 * Worklog
 
 ### Staff functionalities
-* Staff members can be added, removed, deleted and updated. Every time a new staff is added, if the type of salary is not provided, isHourly flag is made 0 meaning that the employee has fixed salary. Along with the type the wage for the employee is also maintained in the same table. 
+* Staff members can be added, removed, deleted and updated. Every time a new staff is added, if the type of salary is not provided, isHourly flag is set 0 meaning that the employee has fixed salary. Along with the type the wage for the employee is also maintained in the same table. 
 
 ### Worklog functionalities
 * Worklog table is maintained in order to track the working hours or days of a particular employee. Worklog table stores working hours in a day for a particular employee. This table needs to updated on a daily basis. 
