@@ -10,7 +10,7 @@ A simple payroll system for staff members deveoped in Spring boot using Java
 ### Install MySQL
 Install MySQL [from here]( https://dev.mysql.com/downloads/mysql/). Create database with the name of your choice. Change the database configurations [here](/src/main/resources/application.properties)
 
-###Run Application
+### Run Application
 Clone the repository on to your system. Import the project into your IDE. Make sure all the dependencies are added and compiled succesfully. 
 
 ## Functionalitites
