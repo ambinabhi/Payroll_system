@@ -66,6 +66,6 @@ An API route that allows to update any parameter of user. Making partial changes
 An API route that allows to worklog of an employee
 
 > GET : ```worklog/view/{staffId}```
-An API route that allows to retreive payroll information of a particular staff member.
+An API route that allows to retreive payroll information of a particular staff member in given date range.
 
 
