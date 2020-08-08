@@ -23,6 +23,10 @@ Clone the repository on to your system. Import the project into your IDE. Make s
 ### Worklog functionalities
 * Worklog table is maintained in order to track the working hours or days of a particular employee. Worklog table stores working hours in a day for a particular employee. This table needs to updated on a daily basis. 
 
+### Database models
+Database relationships
+![uml_fw_design - Page 7](https://user-images.githubusercontent.com/10976047/89714401-a71d5900-d99e-11ea-9691-65495f4b3d1a.png)
+
 ## API Routes
 > POST : ```/staff/new```
 API route for adding a new staff
@@ -54,7 +58,13 @@ An API route that allows to retreive payroll information of a particular staff m
 ###Assumptions
 The APIs retreiving the payroll information for a particular employee are implemented based on the real-life scenario in companies. The employees need to log their working hours regularly on a daily basis or the working hours are tracked based on their log in and log out time from their respective work stations.
 
-Similary, the worklog table needs to be updated daily. When we need to retreive the payroll infromation, > GET : ```worklog/view/{staffId}``` does following calculations.
+For hourly emplyee, the total wage will be product of total working hours and hourly wage.
+
+For fixed employee, number of days are calculated based on the supplied date range. Working hours of fixed salary employeee are assumed as 8hrs. 
+Total wage of fixed employee will be 
+```math 
+number_of_days/30*wage 
+```
 
 
 
