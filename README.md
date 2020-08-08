@@ -8,53 +8,54 @@ A simple payroll system for staff members deveoped in Spring boot using Java
 4. Maven
 
 ### Install MySQL
-Install MySQL [from here]( https://dev.mysql.com/downloads/mysql/). Create database with the name of your choice. Change the database configurations [here](/server/src/db/index.js)
+Install MySQL [from here]( https://dev.mysql.com/downloads/mysql/). Create database with the name of your choice. Change the database configurations [here](/src/main/resources/application.properties)
 
 ###Run Application
-Once all the dependencies are installed navigate inside client/server folders. Run ```npm start``` commands to run the individual applications.
+Clone the repository on to your system. Import the project into your IDE. Make sure all the dependencies are added and compiled succesfully. 
 
 ## Functionalitites
-The whole project has been divided into 2 modules
+* Staff
+* Worklog
 
-* Admin
-* User
+### Staff functionalities
+* Staff members can be added, removed, deleted and updated. Every time a new staff is added, if the type of salary is not provided, isHourly flag is made 0 meaning that the employee has fixed salary. Along with the type the wage for the employee is also maintained in the same table. 
 
-### Admin module functionalities
-* Login (For the purpose of this assignment login for user/admin is hardcoded. Few of the users are created on database using MySQL commnd line for client console directly.)
-* Add books 
-
-### User module functionalities
-* Login
-* View books
-* Borrow Books (Based on the use cases in the assignment)
-* Return Book 
+### Worklog functionalities
+* Worklog table is maintained in order to track the working hours or days of a particular employee. Worklog table stores working hours in a day for a particular employee. This table needs to updated on a daily basis. 
 
 ## API Routes
-> POST : ```/api/login```
-API routes for users and admin to login to the application
+> POST : ```/staff/new```
+API route for adding a new staff
 
-> POST : ```/api/books/addBook (name, author, publisher, quantity)```
-An API route that allow admins to add new book:
+> GET : ```/staff/list```
+An API route that allows to retrieve all existing users.
 
-> GET : ```/api/books/getAllBooks```
-An API route that allow users and admins to get all books in the library
+> GET : ```staff/view/{id}```
+An API route that allow get a particular staff data based on ID
 
-> POST : ```/api/books/borrowBook (email, book_id, quantity)```
-An API route that allow users to borrow a book in the library
+> DELETE : ```staff/delete/{id}```
+An API route that allows to delete a particular staff from database.
 
-> GET : ```/api/books/getAllUserBooks?email=email_id```
-An API route that allow users to get all the books that the user has borrowed but has not returned
+> DELETE : ```staff/deleteAll```
+An API route that allow delete all staff members from DB
 
-> POST : ```/api/books/returnBook (email, book_id, quantity)```
-An API route that allow user to return a book
+> PUT : ```staff/edit/{id}```
+An API route that allows to edit an existing staff's data
 
-###Approach
-The project contains two tables on the database. One for the user management and another for maintaining books in the library.
-The user table has ```isAdmin``` bit in order to classsify the user as admin or user. Based on this flag different home screens are loaded.
-Admin page shows a form to add books and a table to view all books. In contrast, home screen for a user shows availbale books in the library. 
-User has given option to view his borrowed books by navigating to the ```My List``` from the top right dropdown.
+> PATCH : ```staff/edit/{id}```
+An API route that allows to update any parameter of user. Making partial changes.
 
-Books table has columns such as name of the book, author, publisher and quantity available in the library. This table is updated based on the operations performed by the user such as reducing the quantity of a borrowed book. Further, a new table ```borrowedbooks``` table is maintained in order to track borrowed books. When user borrows a book, the quantity is reduced from  ```books``` table and simultaneously inserted into ```borrowedbooks``` table. Similarly when user returns a book, the qunatity is increased from ```books``` table and removed from ```borrowedbooks``` table. Using the life cycle methods provided ny ReactJS framework the home screen interfaces are updated regularly whenever an event occurs. The ```borrowedbooks``` table can further be used to get all the borrowed books by the user by joining it with ```books``` table based on ```user_id```.
+> POST : ```worklog/new```
+An API route that allows to worklog of an employee
 
-Rather than focussing on writing unit test cases, the project provides a comprehensive user interface designed using modular ReactJS components. 
-The same use cases can be performed for multiple users also. 
+> GET : ```worklog/view/{staffId}```
+An API route that allows to retreive payroll information of a particular staff member.
+
+###Assumptions
+The APIs retreiving the payroll information for a particular employee are implemented based on the real-life scenario in companies. The employees need to log their working hours regularly on a daily basis or the working hours are tracked based on their log in and log out time from their respective work stations.
+
+Similary, the worklog table needs to be updated daily. When we need to retreive the payroll infromation, > GET : ```worklog/view/{staffId}``` does following calculations.
+
+
+
+
