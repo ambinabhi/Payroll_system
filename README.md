@@ -55,7 +55,8 @@ An API route that allows to worklog of an employee
 > GET : ```worklog/view/{staffId}```
 An API route that allows to retreive payroll information of a particular staff member.
 
-###Assumptions
+## Assumptions
+
 The APIs retreiving the payroll information for a particular employee are implemented based on the real-life scenario in companies. The employees need to log their working hours regularly on a daily basis or the working hours are tracked based on their log in and log out time from their respective work stations.
 
 For hourly emplyee, the total wage will be product of total working hours and hourly wage.
