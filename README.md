@@ -63,9 +63,9 @@ For hourly emplyee, the total wage will be product of total working hours and ho
 For fixed employee, number of days are calculated based on the supplied date range. Working hours of fixed salary employeee are assumed as 8hrs. 
 Total wage of fixed employee will be 
 ```math 
-number_of_days/30*wage 
+(number_of_days/30) * wage 
 ```
-
+Number of days for a month are assumed to be 30. 
 
 
 
