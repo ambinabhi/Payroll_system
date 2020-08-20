@@ -2,10 +2,13 @@ package com.fileee.payrole.beans;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,26 +21,39 @@ public class Worklog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@Column(name = "WORKLOG_ID")
+	private Integer worklogId;
 
-	private Integer staffId;
+	@ManyToOne
+	@JoinColumn(name="STAFF_ID")
+    private Staff staff;
 
+	@Column(name = "WORKING_HOURS")
 	private Integer workingHours;
-	
+
+	public Integer getWorklogId() {
+		return worklogId;
+	}
+
+	public void setWorklogId(Integer worklogId) {
+		this.worklogId = worklogId;
+	}
+
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "WORKING_DATE")
 	private Date workingDate;
-
-	public Integer getStaffId() {
-		return staffId;
-	}
-
-	public void setStaffId(Integer staffId) {
-		this.staffId = staffId;
-	}
 
 	public Integer getWorkingHours() {
 		return workingHours;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
 	public void setWorkingHours(Integer workingHours) {

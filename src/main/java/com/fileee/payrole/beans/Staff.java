@@ -1,5 +1,6 @@
 package com.fileee.payrole.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,57 +9,63 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "staff", uniqueConstraints = @UniqueConstraint(columnNames = {"id"}) )
-public class Staff  {
-  @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  private Integer id;
+@Table(name = "staff", uniqueConstraints = @UniqueConstraint(columnNames = { "STAFF_ID" }))
+public class Staff {
 
-  private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "STAFF_ID")
+	private Integer staffId;
+	
+	@Column(name = "NAME")
+	private String name;
 
-  private String email;
-  
-  private Boolean isHourly=false;
-  
-  private Integer wage;
-  
-  public Integer getId() {
-    return id;
-  }
+	@Column(name = "EMAIL")
+	private String email;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	@Column(name = "IS_HOURLY")
+	private Boolean isHourly = false;
 
-  public String getName() {
-    return name;
-  }
+	@Column(name = "WAGE")
+	private Integer wage;
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public Integer getStaffId() {
+		return staffId;
+	}
 
-  public String getEmail() {
-    return email;
-  }
+	public void setStaffId(Integer staffId) {
+		this.staffId = staffId;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public String getName() {
+		return name;
+	}
 
-public Boolean getIsHourly() {
-	return isHourly;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-public void setIsHourly(Boolean isHourly) {
-	this.isHourly = isHourly;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public Integer getWage() {
-	return wage;
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-public void setWage(Integer wage) {
-	this.wage = wage;
-}
+	public Boolean getIsHourly() {
+		return isHourly;
+	}
+
+	public void setIsHourly(Boolean isHourly) {
+		this.isHourly = isHourly;
+	}
+
+	public Integer getWage() {
+		return wage;
+	}
+
+	public void setWage(Integer wage) {
+		this.wage = wage;
+	}
 }

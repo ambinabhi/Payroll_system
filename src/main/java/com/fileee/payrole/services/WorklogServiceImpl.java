@@ -25,7 +25,9 @@ public class WorklogServiceImpl implements WorklogService {
 
 	@Override
 	public List<Worklog> findWorklogByIdInDateRange(Date fromDate, Date toDate, Integer staffId) {
-		return (List<Worklog>) worklogRepository.findWorklogByIdInDateRange(fromDate, toDate, staffId);
+		//return (List<Worklog>) worklogRepository.findWorklogByIdInDateRange(fromDate, toDate, staffId);
+		
+		return (List<Worklog>) worklogRepository.findAll();
 	}
 
 }

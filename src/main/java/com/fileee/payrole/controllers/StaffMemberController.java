@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fileee.payrole.beans.Staff;
 import com.fileee.payrole.exception.ResourceNotFoundException;
-import com.fileee.payrole.services.StaffService;
-import com.fileee.payrole.util.Utils;
 import com.fileee.payrole.services.MapperService;
+import com.fileee.payrole.services.StaffService;
 
 @Controller
 @RequestMapping(path = "/staff")
@@ -51,7 +50,8 @@ public class StaffMemberController {
 	public ResponseEntity<List<Staff>> getAllStaff() {
 
 		System.out.println(TAG + " getAllStaff");
-		return new ResponseEntity<>(Utils.sortStaffMembers(staffService.findAllStaff()), HttpStatus.OK);
+		//return new ResponseEntity<>(Utils.sortStaffMembers(staffService.findAllStaff()), HttpStatus.OK);
+		return new ResponseEntity<>(staffService.findAllStaff(), HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

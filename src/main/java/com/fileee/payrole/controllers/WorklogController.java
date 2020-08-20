@@ -38,12 +38,15 @@ public class WorklogController {
 	@Autowired
 	private StaffService staffService;
 
-	@PostMapping(path = "/new", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE) // Requests
-	public ResponseEntity<String> addNewWorklog(@RequestBody Worklog worklog) {
+	@PostMapping(path = "/new/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE) // Requests
+	public ResponseEntity<String> addNewWorklog(@PathVariable Integer staffId, @RequestBody Worklog worklog) {
 
-		System.out.println(TAG + " addNewWorklog");
+		System.out.println(TAG + " addNewWorklog " + staffId);
 		
-		if(staffService.isExistsById(worklog.getStaffId())) {
+		if(staffService.isExistsById(staffId)) {
+			final Staff staff = staffService.findOneById(staffId)
+					.orElseThrow(() -> new ResourceNotFoundException("Staff not found"));
+			worklog.setStaff(staff);
 			worklogService.save(worklog);
 			
 			JSONObject json = new JSONObject();
