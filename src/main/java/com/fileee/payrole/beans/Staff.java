@@ -18,7 +18,7 @@ public class Staff  {
 
   private String email;
   
-  private Integer isHourly=0;
+  private Boolean isHourly=false;
   
   private Integer wage;
   
@@ -46,11 +46,11 @@ public class Staff  {
     this.email = email;
   }
 
-public Integer getIsHourly() {
+public Boolean getIsHourly() {
 	return isHourly;
 }
 
-public void setIsHourly(Integer isHourly) {
+public void setIsHourly(Boolean isHourly) {
 	this.isHourly = isHourly;
 }
 

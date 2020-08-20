@@ -70,7 +70,7 @@ public class WorklogController {
 		Date fromDate = Utils.getFormattedDate(dateObject.getString("fromDate"));
 		Date toDate = Utils.getFormattedDate(dateObject.getString("toDate"));
 		
-		if (staff.getIsHourly() == 1) {
+		if (staff.getIsHourly()) {
 			List<Worklog> logs = worklogService.findWorklogByIdInDateRange(fromDate, toDate, staffId);
 			for (Worklog worklog : logs) {
 				totalWorkingHours = totalWorkingHours + worklog.getWorkingHours();
