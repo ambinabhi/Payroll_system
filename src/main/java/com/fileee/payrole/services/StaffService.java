@@ -18,4 +18,5 @@ public interface StaffService {
 	Optional<Staff> findOneById(Integer staffId);
 	
 	Boolean isExistsById(Integer staffId);
+	
 }

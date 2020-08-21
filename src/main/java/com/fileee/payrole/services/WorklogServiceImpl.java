@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.fileee.payrole.beans.Staff;
 import com.fileee.payrole.beans.Worklog;
 import com.fileee.payrole.repository.WorklogRepository;
 
@@ -19,15 +20,21 @@ public class WorklogServiceImpl implements WorklogService {
 
 	@Override
 	public void save(Worklog worklog) {
-		// TODO Auto-generated method stub
 		worklogRepository.save(worklog);
 	}
 
 	@Override
-	public List<Worklog> findWorklogByIdInDateRange(Date fromDate, Date toDate, Integer staffId) {
-		//return (List<Worklog>) worklogRepository.findWorklogByIdInDateRange(fromDate, toDate, staffId);
+	public List<Worklog> findWorklogsByStaff(Staff staff) {
 		
-		return (List<Worklog>) worklogRepository.findAll();
+		return (List<Worklog>) worklogRepository.findWorklogsByStaff(staff);
 	}
+
+	@Override
+	public List<Worklog> findWorklogByStaffInDateRange(Date fromDate, Date toDate, Staff staff) {
+		return (List<Worklog>) worklogRepository.findWorklogByStaffInDateRange(fromDate, toDate, staff);
+	}
+
+	
+
 
 }

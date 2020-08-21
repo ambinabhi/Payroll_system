@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name = "worklog")
 public class Worklog {
 
@@ -24,7 +25,7 @@ public class Worklog {
 	@Column(name = "WORKLOG_ID")
 	private Integer worklogId;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STAFF_ID")
     private Staff staff;
 

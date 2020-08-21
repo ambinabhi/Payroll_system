@@ -2,8 +2,6 @@ package com.fileee.payrole;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fileee.payrole.beans.Staff;
 import com.fileee.payrole.controllers.StaffMemberController;
-import com.fileee.payrole.exception.ResourceNotFoundException;
+import com.fileee.payrole.exception.StaffNotFoundException;
 import com.fileee.payrole.repository.StaffRepository;
 import com.fileee.payrole.services.MapperService;
 import com.fileee.payrole.services.StaffService;
@@ -40,7 +37,7 @@ class StaffControllerIntegrationTest {
 	@MockBean
 	private WorklogService worklogService;
 	@MockBean
-	private ResourceNotFoundException resourceNotFoundException;
+	private StaffNotFoundException resourceNotFoundException;
 	
 	@Test
 	public void getAllStaffAlphabeticallyAPI() throws Exception 
