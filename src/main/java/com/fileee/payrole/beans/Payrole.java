@@ -8,6 +8,7 @@ public class Payrole {
 	private Integer totalHours;
 	private String staffName;
 	private String emailId;
+	private String salaryType;
 	
 	public Integer getStaffId() {
 		return staffId;
@@ -44,5 +45,11 @@ public class Payrole {
 	}
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
+	}
+	public String getSalaryType() {
+		return salaryType;
+	}
+	public void setSalaryType(String salatyType) {
+		this.salaryType = salatyType;
 	}
 }

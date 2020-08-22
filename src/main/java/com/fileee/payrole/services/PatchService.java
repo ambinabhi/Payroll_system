@@ -14,13 +14,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 @Primary
-public class MapperService {
+public class PatchService {
 	
 	private final ObjectMapper objectMapper;
 	private final DomainObjectReader domainObjectReader;
 	
 	@Autowired
-	public MapperService(ObjectMapper mapper, PersistentEntities persistentEntities, Associations associationLinks)
+	public PatchService(ObjectMapper mapper, PersistentEntities persistentEntities, Associations associationLinks)
 	{
 		this.objectMapper = mapper;
 		this.domainObjectReader = new DomainObjectReader(persistentEntities, associationLinks);

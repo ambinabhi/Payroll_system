@@ -19,8 +19,8 @@ public class WorklogServiceImpl implements WorklogService {
 	private WorklogRepository worklogRepository;
 
 	@Override
-	public void save(Worklog worklog) {
-		worklogRepository.save(worklog);
+	public Worklog save(Worklog worklog) {
+		return worklogRepository.save(worklog);
 	}
 
 	@Override

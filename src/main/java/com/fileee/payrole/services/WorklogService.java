@@ -8,7 +8,7 @@ import com.fileee.payrole.beans.Worklog;
 
 public interface WorklogService {
 		
-	void save(Worklog worklog);
+	Worklog save(Worklog worklog);
 	
 	List<Worklog> findWorklogsByStaff(Staff staff);
 	

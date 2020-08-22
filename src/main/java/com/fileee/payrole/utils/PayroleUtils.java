@@ -26,6 +26,11 @@ public class PayroleUtils {
 		Payrole payrole = new Payrole();
 		payrole.setDuration("" + allWorkLogs.get(0).getWorkingDate() + " - " + allWorkLogs.get(allWorkLogs.size()-1).getWorkingDate());
 		payrole.setEmailId(staff.getEmail());
+		if(staff.getIsHourly()) {
+			payrole.setSalaryType("Hourly Salaried Employee");
+		}else {
+			payrole.setSalaryType("Fixed Salaried Employee");
+		}
 		payrole.setStaffId(staff.getStaffId());
 		payrole.setStaffName(staff.getName());
 		payrole.setTotalHours(totalWorkingHours);

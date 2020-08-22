@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class StaffNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
 	Logger logger = LoggerFactory.getLogger(StaffMemberController.class);
 
-	public StaffNotFoundException(String message) {
+	public ResourceNotFoundException(String message) {
 		super(message);
 		logger.error(message);
 	}

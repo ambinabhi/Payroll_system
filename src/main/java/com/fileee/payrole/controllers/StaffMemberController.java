@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fileee.payrole.beans.Staff;
-import com.fileee.payrole.exception.StaffNotFoundException;
-import com.fileee.payrole.services.MapperService;
+import com.fileee.payrole.exception.ResourceNotFoundException;
+import com.fileee.payrole.services.PatchService;
 import com.fileee.payrole.services.StaffService;
 import com.fileee.payrole.utils.ConstantUtils;
 
@@ -33,7 +33,8 @@ public class StaffMemberController {
 	private StaffService staffService;
 
 	@Autowired
-	private MapperService mapperService;
+	private PatchService patchService;
+	
 
 	@PostMapping(path = "/staff", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE) // Requests
 	public ResponseEntity<Staff> addNewStaff(@RequestBody Staff staff) {
@@ -52,7 +53,7 @@ public class StaffMemberController {
 		logger.info(ConstantUtils.GET_STAFF + staffId);
 
 		Staff staff = staffService.findOneById(staffId)
-				.orElseThrow(() -> new StaffNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
 		return new ResponseEntity<>(staff, HttpStatus.OK);
 	}
 
@@ -71,7 +72,7 @@ public class StaffMemberController {
 		logger.info(ConstantUtils.DELETE_STAFF + staffId);
 
 		Staff staff = staffService.findOneById(staffId)
-				.orElseThrow(() -> new StaffNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
 
 		staffService.delete(staff);
 		return ResponseEntity.noContent().build();
@@ -89,22 +90,22 @@ public class StaffMemberController {
 			staffDb.setName(staff.getName());
 			staffDb.setWage(staff.getWage());
 			return staffDb;
-		}).orElseThrow(() -> new StaffNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
 
 		staffCurrent = staffService.save(staffCurrent);
 		return new ResponseEntity<>(staffCurrent, HttpStatus.OK);
 	}
 
 	@PatchMapping(path = "/staff/{id}")
-	public ResponseEntity<Staff> patchStaff(@PathVariable Integer staffId, @RequestBody String properties) {
+	public ResponseEntity<Staff> patchStaff(@PathVariable("id") Integer staffId, @RequestBody String properties) {
 
 		logger.info(ConstantUtils.PATCH_STAFF + staffId);
 
 		Staff staffCurrent = staffService.findOneById(staffId)
-				.orElseThrow(() -> new StaffNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
 		try {
 			logger.debug(ConstantUtils.PATCH_STAFF);
-			if (!mapperService.map(properties, staffCurrent)) {
+			if (!patchService.map(properties, staffCurrent)) {
 				return new ResponseEntity<>(staffCurrent, HttpStatus.NOT_MODIFIED);
 			}
 		} catch (IOException e) {
