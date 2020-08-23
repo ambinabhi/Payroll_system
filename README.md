@@ -69,7 +69,9 @@ This API takes two parameters from-date and to-date. The service returns payroll
 
 ### PDF Generated
 Payroll PDF - PDF is geneareted using thymleaf library for spring applications. By default the pdf is downloaded onto user's home directory.
+![pdf](https://user-images.githubusercontent.com/10976047/90968054-4b97b300-e4e8-11ea-9891-473ba01b1359.PNG)
 
-[fileee_payroll_9.pdf](https://github.com/ambinabhi/Payroll_system/files/5113313/fileee_payroll_9.pdf)
+
+[Sample - Download Here](https://github.com/ambinabhi/Payroll_system/files/5113313/fileee_payroll_9.pdf)
 
 
