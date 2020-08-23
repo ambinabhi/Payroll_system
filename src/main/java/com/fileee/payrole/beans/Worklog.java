@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "worklog")
@@ -27,6 +28,7 @@ public class Worklog {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="STAFF_ID")
+	@JsonIgnoreProperties("staff")
     private Staff staff;
 
 	@Column(name = "WORKING_HOURS")

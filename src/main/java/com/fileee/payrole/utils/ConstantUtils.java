@@ -12,5 +12,6 @@ public class ConstantUtils {
 	public static final String ADD_NEW_WORKLOG = "Adding New Worklog By Id ";
 	public static final String GET_WORKLOG_BY_STAFF = "Get Worklog By Staff";
 	public static final String GET_WORKLOG_BY_RANGE = "Get Worklog In Date Range ";
+	public static final String GET_ALL_WORKLOGS_BY_STAFF = "Get All Worklogs By Staff";;
 	
 }

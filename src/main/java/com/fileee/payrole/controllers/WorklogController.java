@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fileee.payrole.beans.Payrole;
@@ -56,9 +57,19 @@ public class WorklogController {
 			
 			return new ResponseEntity<>(worklog, HttpStatus.CREATED);
 	}
+
+	@RequestMapping(value = "/worklog", params = "staffId")
+	public ResponseEntity<List<Worklog>> getAllWorklogsByStaff(@RequestParam Integer staffId) {
+		logger.info(ConstantUtils.GET_ALL_STAFF);
+		
+		final Staff staff = staffService.findOneById(staffId)
+				.orElseThrow(() -> new ResourceNotFoundException("Staff Member with staffId: " + staffId + " Not Found"));
+		
+		return new ResponseEntity<>(worklogService.findWorklogsByStaff(staff), HttpStatus.OK);
+	}
 	
 	@GetMapping(path = "/worklog/{staffId}")
-	public ResponseEntity<Payrole> getAllWorklogsByStaff(@PathVariable Integer staffId, 
+	public ResponseEntity<Payrole> getAllWorklogsByStaffInDateRange(@PathVariable Integer staffId, 
 			@RequestParam("from_date") String fromDate, @RequestParam("to_date") String toDate) {
 		
 		logger.info(ConstantUtils.GET_WORKLOG_BY_RANGE + staffId);
@@ -70,7 +81,7 @@ public class WorklogController {
 		
 		if(fromDate.isEmpty() || toDate.isEmpty()) {
 			logger.info("No Dates Found: Getting All Worklog by Staff");
-			allWorkLogs = worklogService.findWorklogsByStaff(staff);
+			//allWorkLogs = worklogService.findWorklogsByStaff(staff);
 		
 		}else {
 			logger.info("Dates Found: Getting Worklog in Date Range");

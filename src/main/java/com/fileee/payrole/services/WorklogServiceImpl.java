@@ -34,7 +34,4 @@ public class WorklogServiceImpl implements WorklogService {
 		return (List<Worklog>) worklogRepository.findWorklogByStaffInDateRange(fromDate, toDate, staff);
 	}
 
-	
-
-
 }

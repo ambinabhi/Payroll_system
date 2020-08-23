@@ -13,5 +13,4 @@ public interface WorklogService {
 	List<Worklog> findWorklogsByStaff(Staff staff);
 	
 	List<Worklog> findWorklogByStaffInDateRange(Date fromDate, Date toDate, Staff staff);
-	
 }
