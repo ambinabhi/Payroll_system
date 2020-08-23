@@ -39,6 +39,7 @@ Number of days for a month are assumed to be 30.
 ### Database models
 Database relationships
 ![uml_fw_design - Page 7](https://user-images.githubusercontent.com/10976047/89714401-a71d5900-d99e-11ea-9691-65495f4b3d1a.png)
+StaffId in worklg table has foreign key reference to staff table.
 
 ## API Routes
 > POST : ```/staff```
