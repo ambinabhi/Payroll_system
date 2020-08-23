@@ -47,24 +47,26 @@ API route for adding a new staff
 > GET : ```/staff```
 An API route that allows to retrieve all existing users.
 
-> GET : ```staff/{id}```
+> GET : ```/staff/{id}```
 An API route that allow get a particular staff data based on ID
 
-> DELETE : ```staff/{id}```
+> DELETE : ```/staff/{id}```
 An API route that allows to delete a particular staff from database.
 
-> PUT : ```staff/{id}```
+> PUT : ```/staff/{id}```
 An API route that allows to edit an existing staff's data
 
-> PATCH : ```staff/{id}```
+> PATCH : ```/staff/{id}```
 An API route that allows to update any parameter of user. Making partial changes.
 
-> POST : ```worklog/{staffId}```
+> POST : ```/worklog/{staffId}```
 An API route that allows to worklog of an employee
 
-> GET : ```worklog/{staffId}```
-An API route that allows to retreive payroll information of a particular staff member in given date range.
-This API takes two parameters from-date and to-date. The service returns payroll object for all the worklogs for a particular staff unless the date ranges are specified.
+> GET : ```/worklog``` ```Param: staffId```
+An API route which take staffId as parameter and  allows to retreives all worklogs of a particular staff member
+
+> GET : ```/worklog``` ```Param: staffId, fromDate, toDate```
+This API takes three parameters staffId, from-date and to-date. The service returns payroll object for all the worklogs for a particular staff in the specified date ranges.
 
 
 ### PDF Generated
