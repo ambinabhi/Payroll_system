@@ -76,7 +76,7 @@ class WorklogControllerTest {
 	}
 
 	@Test
-	public void get_allWorklogWithoutDatesTest_OK() throws Exception {
+	public void get_allWorklogWithStaffTest_OK() throws Exception {
 		
 		Staff staff = new Staff();
 		staff.setStaffId(15);

@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,9 +67,9 @@ public class WorklogController {
 		return new ResponseEntity<>(worklogService.findWorklogsByStaff(staff), HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/worklog/{staffId}")
-	public ResponseEntity<Payrole> getAllWorklogsByStaffInDateRange(@PathVariable Integer staffId, 
-			@RequestParam("from_date") String fromDate, @RequestParam("to_date") String toDate) {
+	@RequestMapping(value = "/worklog", params = { "staffId", "fromDate","toDate"})
+	public ResponseEntity<Payrole> getAllWorklogsByStaffInDateRange(@RequestParam Integer staffId, 
+			@RequestParam String fromDate, @RequestParam String toDate) {
 		
 		logger.info(ConstantUtils.GET_WORKLOG_BY_RANGE + staffId);
 		
@@ -81,7 +80,7 @@ public class WorklogController {
 		
 		if(fromDate.isEmpty() || toDate.isEmpty()) {
 			logger.info("No Dates Found: Getting All Worklog by Staff");
-			//allWorkLogs = worklogService.findWorklogsByStaff(staff);
+			throw new ResourceNotFoundException("Missing Date Ranges");
 		
 		}else {
 			logger.info("Dates Found: Getting Worklog in Date Range");
