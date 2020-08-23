@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -77,7 +80,7 @@ class WorklogControllerTest {
 
 	@Test
 	public void get_allWorklogWithStaffTest_OK() throws Exception {
-		
+
 		Staff staff = new Staff();
 		staff.setStaffId(15);
 		staff.setName("Kate Hudson");
@@ -93,19 +96,63 @@ class WorklogControllerTest {
 		worklog1.setStaff(staff);
 		worklog1.setWorkingHours(8);
 		worklog1.setWorkingDate(DateUtils.getFormattedDate("2020-07-12"));
-		when(worklogService.save(any(Worklog.class))).thenReturn(worklog1);
 
 		Worklog worklog2 = new Worklog();
 		worklog2.setStaff(staff);
 		worklog2.setWorkingHours(4);
 		worklog2.setWorkingDate(DateUtils.getFormattedDate("2020-08-12"));
+
+		List<Worklog> worklogList = new ArrayList<Worklog>();
+		worklogList.add(worklog1);
+		worklogList.add(worklog2);
+
+		when(worklogService.findWorklogsByStaff(staff)).thenReturn(worklogList);
+
+		mockMvc.perform(MockMvcRequestBuilders.request(HttpMethod.GET, "/worklog").param("staffId", "15"))
+						.andDo(print())
+						.andExpect(status().isOk()).
+						 andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
+						.andExpect(MockMvcResultMatchers.jsonPath("$[0].workingHours").value(8))
+						.andExpect(MockMvcResultMatchers.jsonPath("$[1].workingHours").value(4));
+
+	}
+	
+	@Test
+	public void get_allWorklogInDateRangeTest_OK() throws Exception {
+
+		Staff staff = new Staff();
+		staff.setStaffId(15);
+		staff.setName("Kate Hudson");
+		staff.setIsHourly(false);
+		staff.setEmail("kathyson1985@gmail.com");
+		staff.setWage(2500);
+
+		when(staffService.save(any(Staff.class))).thenReturn(staff);
+
+		when(staffService.findOneById(anyInt())).thenReturn(Optional.of(staff));
+
+		Worklog worklog1 = new Worklog();
+		worklog1.setStaff(staff);
+		worklog1.setWorkingHours(8);
+		worklog1.setWorkingDate(DateUtils.getFormattedDate("2020-07-10"));
+		when(worklogService.save(any(Worklog.class))).thenReturn(worklog1);
+		
+		Worklog worklog2 = new Worklog();
+		worklog2.setStaff(staff);
+		worklog2.setWorkingHours(4);
+		worklog2.setWorkingDate(DateUtils.getFormattedDate("2020-08-13"));
 		when(worklogService.save(any(Worklog.class))).thenReturn(worklog2);
 
-		String fromDate = "";
-		String toDate = "";
-		mockMvc.perform(MockMvcRequestBuilders.get("/worklog/10")
-				.param("from_date", fromDate).param("to_date", toDate))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
+		List<Worklog> worklogList = new ArrayList<Worklog>();
+		worklogList.add(worklog1);
+		worklogList.add(worklog2);
+
+		when(worklogService.findWorklogsByStaff(staff)).thenReturn(worklogList);
+
+		mockMvc.perform(MockMvcRequestBuilders.request(HttpMethod.GET, "/worklog")
+						.param("staffId", "15").param("fromDate", "2020-07-10").param("toDate", "2020-07-13"))
+						.andDo(print())
+						.andExpect(status().isOk());
+
 	}
 }
