@@ -41,31 +41,35 @@ Database relationships
 ![uml_fw_design - Page 7](https://user-images.githubusercontent.com/10976047/89714401-a71d5900-d99e-11ea-9691-65495f4b3d1a.png)
 
 ## API Routes
-> POST : ```/staff/new```
+> POST : ```/staff```
 API route for adding a new staff
 
-> GET : ```/staff/list```
+> GET : ```/staff```
 An API route that allows to retrieve all existing users.
 
-> GET : ```staff/view/{id}```
+> GET : ```staff/{id}```
 An API route that allow get a particular staff data based on ID
 
-> DELETE : ```staff/delete/{id}```
+> DELETE : ```staff/{id}```
 An API route that allows to delete a particular staff from database.
 
-> DELETE : ```staff/deleteAll```
-An API route that allow delete all staff members from DB
-
-> PUT : ```staff/edit/{id}```
+> PUT : ```staff/{id}```
 An API route that allows to edit an existing staff's data
 
-> PATCH : ```staff/edit/{id}```
+> PATCH : ```staff/{id}```
 An API route that allows to update any parameter of user. Making partial changes.
 
-> POST : ```worklog/new```
+> POST : ```worklog/{staffId}```
 An API route that allows to worklog of an employee
 
-> GET : ```worklog/view/{staffId}```
+> GET : ```worklog/{staffId}```
 An API route that allows to retreive payroll information of a particular staff member in given date range.
+This API takes two parameters from-date and to-date. The service returns payroll object for all the worklogs for a particular staff unless the date ranges are specified.
+
+
+### PDF Generated
+Payroll PDF - PDF is geneareted using thymleaf library for spring applications. By default the pdf is downloaded onto user's home directory.
+
+[fileee_payroll_9.pdf](https://github.com/ambinabhi/Payroll_system/files/5113313/fileee_payroll_9.pdf)
 
 
